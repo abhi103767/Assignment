@@ -29,10 +29,31 @@
         let query = document.getElementById('query').value;
       let res =   await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=AIzaSyA5nTMVuw7HdkOmvepVgtMM_OqJlUtPaZA&maxResults=20`);
        let data = await res.json();
-       appendVideos(data.items);
+       appendVideos1(data.items);
+
     }
 
+    async function popular(){
+      let res = await fetch('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyA5nTMVuw7HdkOmvepVgtMM_OqJlUtPaZA&maxResults=20');
+      let data = await res.json();
+      console.log(data)
+     appendVideos(data.items);
+    }
+    popular();
+
     function appendVideos(video_data){
+        parent.innerHTML = null;
+        video_data.forEach( ({ id }) => {
+         
+            console.log(id);
+
+            let div = document.createElement('div');
+            div.innerHTML= `<iframe width="300" height="210" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+            div.style.marginTop = '20px';
+            parent.append(div);
+        });
+    }
+    function appendVideos1(video_data){
         parent.innerHTML = null;
         video_data.forEach( ({ id : {videoId}}) => {
          
@@ -43,5 +64,6 @@
             div.style.marginTop = '20px';
             parent.append(div);
         });
-    }
+    };
+
 </script>
