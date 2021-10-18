@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+    }
+    #movie_list input{
+      width:  73%;
+    }
+    #deboun{
+       height: 600px;
+       overflow: scroll;
+      
+    }
+    #deboun img {
+        width: 30%;
+    }
+    #movie_detail{
+        display: flex;
+        padding-right: 20px;
+    }
+</style>
+<body>
+<div id="container">
+<div id="movie_list">
+<input type='text' id="name" oninput="debounce()" placeholder="Enter the movie Name">
+<button  id='movie' onclick="">Search Movie</button>
+</div>
+<div id="deboun"></div>
+</div>
+    
+</body>
+<script>
+let time;
+function search_movie(){
+    let name = document.getElementById('name').value;
+    
+fetch(`http://api.themoviedb.org/3/search/movie?api_key=693d82b9000cc91b1f64e8db4b328167&query=${name}`)
+.then((res) => {
+    return res.json();
+})
+.then((res) =>{
+    let data = res.results;
+    console.log(data);
+    poster_movie(data);
+})
+}
+
+let parent = document.getElementById('deboun');
+function poster_movie(movies){
+    parent.innerHTML = null;
+    movies.forEach((movie) => {
+      
+        let div = document.createElement('div');
+        div.id = 'movie_detail'
+        let img = document.createElement('img');
+       img.src = `  https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+        console.log(movie.poster_path);
+        let title = document.createElement('p');
+        title.innerText = movie.title;
+
+        div.append(img,title);
+        parent.append(div);
+    });
+
+   
+
+
+    
+}
+function debounce(){
+  clearTimeout(time);
+ time = setTimeout(() => {
+    search_movie();
+},1000);
+  
+}
+</script>
+</html>

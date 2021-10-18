@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        font-weight: regular;
+    }
+ #container{
+     margin-top: 30px;
+     box-sizing: border-box;
+     padding: 5px;
+     display: grid;
+     grid-template-columns: repeat(5 , 18%);
+     grid-gap: 20px;
+     justify-content: center;
+
+ }
+ #home{
+     display: flex;
+     flex-direction: column;
+     
+ }
+ #home img{
+   height: 100px;
+   cursor: pointer;
+ }
+ #search{
+     width: 34%;
+     margin: auto;
+ }
+
+ #search input{
+     width: 349px;
+     padding: 10px;
+ }
+ #search button{
+     padding: 10px;
+     cursor: pointer;
+ }
+ img {
+    
+     width: 100%;
+     height: 180px;
+     
+ }
+
+ h5 {
+     cursor: pointer;
+ }
+ h5:hover{
+     text-decoration: underline;
+ }
+
+</style>
+<body>
+    <div id="home">
+        <img src="https://static.toiimg.com/photo/79638690.cms" alt="">
+        <div id="search">
+        <input type="text" id='name' placeholder = "Search news" required>
+        <button onclick="search_news()">Search News</button>
+    </div>
+    </div>
+    <div id="container"></div>
+</body>
+<script src="script/home.js"></script>
+
+</html>
