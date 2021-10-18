@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #favour{
+        background-color: red;
+        left: 280px;
+        top: -110px;
+        position: relative;
+        width: 20px;
+    }
+</style>
+<body>
+    <input type="text" placeholder="Search Movie" id = 'movie'required/>
+    <button onclick="search_movie()">Search Movie</button>
+    <div id="container"></div>
+</body>
+<script>
+  
+   function search_movie(){
+       let name = document.getElementById('movie').value;
+       fetch(`https://www.omdbapi.com/?t=${name}&apikey=9d2bb0ef`).then(function(res){
+        return res.json();
+    })
+
+    .then(function(res){
+        console.log(res.Response);
+        if (res.Response == 'True'){
+       let data = res;
+        show_movie(data);
+        }
+        else {
+            alert('Movie is not found');
+        }
+       
+    
+       
+        
+       
+        
+    })
+  
+    
+   // {Response: 'False', Error: 'Movie not found!'}
+
+
+   
+  
+}
+  let parent = document.getElementById('container');
+    function show_movie(movie){
+        console.log(movie.Response)
+        parent.innerHTML = null;
+        let div = document.createElement('div');
+        let img = document.createElement('img');
+        img.src = movie.Poster;
+
+        let name = document.createElement('p');
+        name.textContent = movie.Title;
+        
+        let rating = document.createElement('p');
+        rating.textContent = movie.imdbRating;
+
+        let favourite = document.createElement('img');
+        favourite.src = 'https://image.shutterstock.com/image-vector/favourite-location-marker-600w-1209264253.jpg';
+        favourite.id = 'favour';
+
+       if(movie.imdbRating > 8.5){
+        div.append(img,name,rating,favourite);
+       } 
+       else {
+        div.append(img,name,rating);
+       }
+       
+    
+       parent.append(div);
+      
+       
+    }
+  
+
+</script>
+</html>
