@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <div id="combine">
+    <input id="search" placeholder="search the recipe">
+    <button id="search_button">Search</button> 
+</div>
+    <div id="container"></div>
+  
+    
+</body>
+<script type="module">
+    import navbar from './component/navbar.js';
+   let navbar_div = document.getElementById("navbar");
+   navbar_div.innerHTML = navbar();
+      import {getData,append} from './script/showData.js';
+   
+  let search_button = document.getElementById('search_button');
+  search_button.addEventListener('click',search_meal);
+  let container = document.getElementById('container');
+  
+ function search_meal(){
+     container.innerHTML = null;
+     let name = document.getElementById('search').value;
+    let Response = getData(`https://themealdb.com/api/json/v1/1/search.php?s=${name}`);
+   console.log(Response);
+   Response.then((res) => {
+       let data = res.meals ;
+      console.log(data);
+      append(data,container);
+
+      
+   });
+
+ }
+ 
+
+</script>
+</html>

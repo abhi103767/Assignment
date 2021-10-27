@@ -1,0 +1,42 @@
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4%;
+    padding-right: 4%;
+    border: solid 1px black;
+  }
+
+  #options {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #options h3 {
+    padding-left: 30px;
+    padding-right: 10px;
+  }
+  #container {
+      display: grid;
+      grid-template-columns: repeat(4,20%);
+      grid-gap: 20px;
+      justify-content: center;
+  }
+  #container img {
+      margin-top: 10px;
+    width: 100%;
+  }
+  #combine{
+      margin: 10px;
+      width: 40%;
+      margin: auto;
+  }
+  #combine input{
+
+   width: 70%;
+   padding: 10px;
+
+  }
+  #combine button{
+    padding: 10px;
+    cursor: pointer;
+  }
