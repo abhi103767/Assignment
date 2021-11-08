@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #navbar {
+        display: flex;
+        justify-content: space-around;
+        background-color: azure;
+    }
+    #container {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+    }
+    #container img{
+    width:  20%;
+    }
+   
+</style>
+<body>
+    <div id="navbar">
+     <h3><a href='menu.html'>Menu</a></h3>
+     <h3><a href="sign.html">Sign Up</a></h3>
+     <h3><a href="login.html">Login</a></h3>
+     <h3><a href="cart.html">Cart</a></h3>
+    </div>
+    <div id="container"></div>
+</body>
+<script>
+ let datas = JSON.parse(localStorage.getItem('cart'));
+ console.log(datas);
+
+let parent = document.getElementById('container');
+showData(datas);
+function showData(datas){
+    datas.forEach(({strMealThumb,idMeal,strMeal}) => {
+        let div = document.createElement('div');
+
+        let img = document.createElement('img');
+        img.src = strMealThumb;
+
+        let name = document.createElement('p');
+        name.innerText = strMeal;
+
+        let price = document.createElement('p');
+        price.innerText = "Rs " +idMeal;
+
+        let btn = document.createElement('button');
+        btn.innerText = 'Book Order';
+        btn.onclick = () => {
+            alert(" Order is booked");
+            setTimeout(() => {
+                alert('your order is cooked')
+            },3000)
+            setTimeout(() => {
+                alert('your order is ready')
+            },8000)
+            setTimeout(() => {
+                alert('Out of Delivery')
+            },10000)
+            setTimeout(() => {
+                alert('Delivered');
+            },12000)
+        }
+
+
+        div.append(img,name,price,btn);
+        parent.append(div);
+    });
+    
+}
+
+</script>
+</html>
+</body>
+</html>
